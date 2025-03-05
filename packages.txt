@@ -1,5 +1,0 @@
-streamlit
-pandas
-plotly==5.0.0
-sqlalchemy
-psycopg2
