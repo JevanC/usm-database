@@ -49,13 +49,15 @@ def college_cloropleth(colleges_count, returning_colleges_count):
 
     fig = px.bar(data, x = "City", y="Colleges", labels="Total College Attendance")
     fig2 = px.bar(data_ret, x = "City", y="Colleges", labels="Total College Attendance")
+    
 
     col1, col2 = st.columns(2)
     with col1:
-        st.plotly_chart(fig)
+        st.plotly_chart(fig, key="college_chart_total")
     
     with col2:
-        st.plotly_chart(fig2)
+        st.plotly_chart(fig2, key="college_chart_returning")
+
 
 st.set_page_config(page_title="Event Sales Dashboard", layout="wide")
 
