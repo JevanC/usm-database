@@ -1,4 +1,4 @@
---upgrade
+--upgrade pip
 pandas
 plotly
 sqlalchemy
