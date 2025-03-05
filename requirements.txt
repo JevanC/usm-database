@@ -1,5 +1,5 @@
-pip==25.0.1
 pandas
 plotly
 sqlalchemy
-psycopg2
+psycopg2-binary
+streamlit
