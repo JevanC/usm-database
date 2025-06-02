@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, Date, DateTime, Text, Boolean, Numeric, ForeignKey, UniqueConstraint
+from sqlalchemy import create_engine, Column, Integer, String, Date, DateTime, Text, Boolean, Numeric, ForeignKey, UniqueConstraint, Float
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
@@ -9,6 +9,20 @@ class TicketTypes(Base):
     ticket_type = Column(String(100), nullable=False, unique=True)
 
     sales = relationship("Sales", back_populates="ticket")
+
+class Colleges(Base):
+    __tablename__ = 'colleges'
+    college_id = Column(Integer, primary_key=True)
+    name = Column(String)
+    latitude = Column(Float)  # Double Precision
+    longitude = Column(Float)  # Double Precision
+    city = Column(String)
+    state = Column(String(2))
+    zip = Column(String(5))  # Typical zip length
+    county = Column(String)
+    country = Column(String)
+
+    #participants = relationship("Participants", back_populates="college")
 
 class Participants(Base):
     __tablename__ = 'participants'
@@ -25,6 +39,10 @@ class Participants(Base):
     major_or_profession = Column(Text)
     college = Column(Text)
     last_updated = Column(DateTime)
+    college_id = Column(Integer, ForeignKey('colleges.college_id'))  # ForeignKey linking to colleges table
+
+    
+    #colleges = relationship("Colleges", back_populates="participants")
 
     sales = relationship("Sales", back_populates="participant")
 
