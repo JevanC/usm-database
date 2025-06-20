@@ -1,3 +1,4 @@
+streamlit
 annotated-types
 anyio
 appnope
