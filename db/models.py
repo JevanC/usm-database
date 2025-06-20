@@ -29,7 +29,7 @@ class Participants(Base):
     participant_id = Column(Integer, primary_key=True)
     first_name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
-    birth_date = Column(Date, nullable=False)
+    birth_date = Column(Date)
     home_address = Column(String(100))
     home_city = Column(String(50))
     home_state = Column(String(50))
@@ -37,7 +37,7 @@ class Participants(Base):
     phone_number = Column(String(20))
     gender = Column(String(20))
     major_or_profession = Column(Text)
-    college = Column(Text)
+    incomplete = Column(Boolean)
     last_updated = Column(DateTime)
     college_id = Column(Integer, ForeignKey('colleges.college_id'))  # ForeignKey linking to colleges table
 
@@ -70,8 +70,8 @@ class Sales(Base):
     sunday_hotel = Column(Boolean, nullable=False, default=False)
 
     event_id = Column(Integer, ForeignKey('events.event_id', ondelete="CASCADE"))
-    participant_id = Column(Integer, ForeignKey('participants.participant_id', ondelete="SET NULL"))
-    ticket_id = Column(Integer, ForeignKey('ticket_types.ticket_id', ondelete='SET NULL'))
+    participant_id = Column(Integer, ForeignKey('participants.participant_id', ondelete="SET NULL", onupdate="CASCADE"))
+    ticket_id = Column(Integer, ForeignKey('ticket_types.ticket_id', ondelete='SET NULL', onupdate="CASCADE"))
 
     event = relationship("Events", back_populates="sales")
     participant = relationship("Participants", back_populates="sales")
