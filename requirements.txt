@@ -4,6 +4,8 @@ thefuzz
 regex
 plotly
 dotenv
+google-genai
+google
 psycopg2-binary
 annotated-types
 anyio
