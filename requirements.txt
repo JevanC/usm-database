@@ -3,6 +3,7 @@ sqlalchemy
 thefuzz
 plotly
 dotenv
+psycopg2
 annotated-types
 anyio
 appnope
