@@ -12,7 +12,6 @@ from visulizations.colleges_pie_charts import pie_charts
 from dotenv import load_dotenv
 import os
 
-load_dotenv() 
 
 
 st.set_page_config(page_title="Event Sales Dashboard", layout="wide")

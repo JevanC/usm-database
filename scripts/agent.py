@@ -62,6 +62,8 @@ async def ask_llm(client, query):
         - ticket_id INTEGER REFERENCES ticket_types(ticket_id)
 
         IMPORTANT: Use lowercase table names (participants, events, sales, etc.)
+        IMPORTANT: every participant in our table is guarenteed to be unique, UNLESS THEY ARE MARKED INCOMPLETE, THIS MEANS THEY MAY BE A DUPLICATE OF ANOTHER USER IN OUR DATA
+        WHEN DEALING WITH THIS, CROSS CHECK EVENTS PARTICPATED, FIRST NAME, LAST NAME, AND EVERY OTHER PIECE OF INFORMATION TO SEE IF ITS A DUPLICATE OR NOT, DO NOT JUST IGNORE THEM
 
         English Question:
         """
@@ -78,6 +80,7 @@ async def ask_llm(client, query):
     
     sql_text = sql_text.strip()
     query_results = query_db(sql_text)
+
 
     return query_results
 
@@ -103,17 +106,28 @@ async def translate_sql_results(client, question, answer):
     response = client.models.generate_content(
         model='gemini-2.0-flash',
         config=types.GenerateContentConfig(
-            system_instruction=query_to_english  # Removed .format()
+            system_instruction=query_to_english 
         ),
         contents=[question_str, answer_str]
     )
     
     return response.text
 
+def sanatize(client, response):
+    return client.models.generate_content(
+        model='gemini-2.0-flash',
+        config=types.GenerateContentConfig(
+            system_instruction="You are an expert at making sure privacy concerns are met. Ensure that any answer that the LLM gives" \
+            "Before it gets to the user, does not risk leaking private data, such as: phone numbers, addresses, emails, ect" \
+            "The most you are allowed to give is a first name when we talk about particicular participants. If it violates your rules, your response"\
+            "let the user know why you cannot give that information. Otherwise keep the response as it was" 
+        ),
+        contents=[response])
+
 def automatic_query(client, question):
-    
     answer_sql = asyncio.run(ask_llm(client, question))
     if answer_sql is not None:
         answer_translated = asyncio.run(translate_sql_results(client, question, answer_sql))
-        return answer_translated
+        
+        return sanatize(client, answer_translated).text
         

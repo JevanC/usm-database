@@ -7,9 +7,7 @@ import os
 from dotenv import load_dotenv
 import os
 
-load_dotenv() 
-
-genai_api = os.getenv("genai_api")
+genai_api = st.secrets["genai_api"]
 client = genai.Client(api_key=genai_api)
 
 
