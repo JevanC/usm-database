@@ -2,6 +2,7 @@ streamlit
 sqlalchemy
 thefuzz
 plotly
+dotenv
 annotated-types
 anyio
 appnope
