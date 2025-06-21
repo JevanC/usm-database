@@ -4,6 +4,7 @@ thefuzz
 plotly
 dotenv
 psycopg2
+psycopg2-binary
 annotated-types
 anyio
 appnope
