@@ -1,4 +1,5 @@
 streamlit
+sqlalchemy
 plotly
 annotated-types
 anyio
