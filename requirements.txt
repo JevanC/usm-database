@@ -30,7 +30,7 @@ pandas
 pillow
 plotly
 protobuf
-psycopg2
+psycopg2-binary
 pyarrow
 pyasn1
 pyasn1_modules
