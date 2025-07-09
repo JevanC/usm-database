@@ -3,6 +3,20 @@ from db.database import query_db, SessionLocal
 from db.models import Participants, Events, TicketTypes, Sales, Colleges
 from sqlalchemy import func
 
+def get_ticket_types(session, selected_event_id):
+    if selected_event_id is not None:
+        return session.query(TicketTypes.ticket_type, func.count(TicketTypes.ticket_type)) \
+        .join(Sales, Sales.ticket_id == TicketTypes.ticket_id) \
+        .join(Events, Events.event_id == Sales.event_id) \
+        .filter(Events.event_id == selected_event_id) \
+        .group_by(TicketTypes.ticket_type) \
+        .all()
+    return session.query(TicketTypes.ticket_type, func.count(TicketTypes.ticket_type)) \
+        .join(Sales, Sales.ticket_id == TicketTypes.ticket_id) \
+        .join(Events, Events.event_id == Sales.event_id) \
+        .group_by(TicketTypes.ticket_type) \
+        .all()
+
 def get_norcal_yoy(session, selected_name):
     return session.query(Events.event_name, Events.location, Events.year, func.count(Participants.participant_id)) \
             .join(Colleges, Colleges.college_id == Participants.college_id) \

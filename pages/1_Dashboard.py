@@ -35,8 +35,7 @@ with SessionLocal() as session:
     revenue = static_query.get_total_revenue(session=session, selected_event_id=selected_event_id)
     college_counts = static_query.get_colleges_counts(session=session, selected_event_id=selected_event_id)
     returning_colleges = static_query.get_returning_colleges(session=session, selected_event_id=selected_event_id)
+    ticket_types = static_query.get_ticket_types(session=session, selected_event_id=selected_event_id)
 
 kpi_banner(norcal, socal, attendees, retention, revenue)
-pie_charts(college_counts, returning_colleges)
-
-
+pie_charts(college_counts, returning_colleges, ticket_types)
