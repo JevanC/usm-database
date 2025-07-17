@@ -60,3 +60,17 @@ typing_extensions
 tzdata
 urllib3
 websockets
+langchain
+langchain-community
+langchain-core
+langchain-google-genai
+langchain-tavily==0.2.9
+langchain-text-splitters
+langgraph
+langgraph-checkpoint
+langgraph-prebuilt
+langgraph-sdk
+langsmith
+pinecone
+pinecone-plugin-assistant
+pinecone-plugin-interface
