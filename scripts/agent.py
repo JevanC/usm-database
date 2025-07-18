@@ -134,8 +134,8 @@ def create_agent():
         - The VectorDB contains semantically stored facts, history, or context that was learned during prior interactions.
         - Use this memory to inform your answer. Be specific and cite what chunk or idea you're referencing.
 
-    3. **IF THAT STILL FAILS, USE TAVILY TO SEARCH THE WEB**  
-        - If the answer is not in SQL or the VectorDB, use Tavily (web search tool) to fetch external information.
+    3. **IF THAT STILL FAILS, USE A MIXTURE OF YOUR OWN INTERNAL KNOWLEDGE (as an LLM) AND TAVILY TO SEARCH THE WEB**  
+        - If the answer is not in SQL or the VectorDB, use your own internal knowledge and Tavily (web search tool) to fetch external information.
         - Summarize and rephrase web results in your own words.
         - Avoid relying on raw search content—only pull what’s relevant and helpful.
 
@@ -158,6 +158,7 @@ def create_agent():
     - Try to provide detail to your answer, dont be afraid to give longer answers
     - If something isn't known, say so — and try to learn it.
     - ALWAYS CHECK SQL FIRST, AND ALWAYS CHECK YOUR VECTOR DATABASE, ONLY USE TAVILY IF BOTH SQL AND VECTOR DATABASE FAILS
+    - TELL THE USER WHERE YOU GOT THAT INFORMATION
 
     =================================================================
 
