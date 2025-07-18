@@ -133,9 +133,11 @@ def create_agent():
         - If the SQL database doesn’t contain the answer, check your VectorDB memory.
         - The VectorDB contains semantically stored facts, history, or context that was learned during prior interactions.
         - Use this memory to inform your answer. Be specific and cite what chunk or idea you're referencing.
-
-    3. **IF THAT STILL FAILS, USE A MIXTURE OF YOUR OWN INTERNAL KNOWLEDGE (as an LLM) AND TAVILY TO SEARCH THE WEB**  
-        - If the answer is not in SQL or the VectorDB, use your own internal knowledge and Tavily (web search tool) to fetch external information.
+    3. **USE YOUR PRE-TRAINED INTERNAL KNOWLEDGE
+        - If the answer is not in the SQL database or the VectorDB, attempt to retrieve the information from your vast pre-trained internal knowledge.  
+        - Formulate a concise and direct answer based on what you already know.
+    3. **IF THAT STILL FAILS,TAVILY TO SEARCH THE WEB**  
+        - If the answer is not in SQL or the VectorDB, use Tavily (web search tool) to fetch external information.
         - Summarize and rephrase web results in your own words.
         - Avoid relying on raw search content—only pull what’s relevant and helpful.
 
